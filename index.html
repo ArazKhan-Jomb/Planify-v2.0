@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planify – Premium Productivity</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- ═══════════════ SPLASH SCREEN ═══════════════ -->
+    <div id="splash">
+      <div class="splash-bg"></div>
+      <div class="splash-orb orb1"></div>
+      <div class="splash-orb orb2"></div>
+      <div class="splash-orb orb3"></div>
+      <div class="splash-content">
+        <div class="splash-icon">
+          <svg
+            viewBox="0 0 48 48"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect x="4" y="4" width="18" height="18" rx="5" fill="url(#g1)" />
+            <rect
+              x="26"
+              y="4"
+              width="18"
+              height="18"
+              rx="5"
+              fill="url(#g2)"
+              opacity="0.7"
+            />
+            <rect
+              x="4"
+              y="26"
+              width="18"
+              height="18"
+              rx="5"
+              fill="url(#g2)"
+              opacity="0.7"
+            />
+            <rect x="26" y="26" width="18" height="18" rx="5" fill="url(#g1)" />
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#a78bfa" />
+                <stop offset="100%" stop-color="#60a5fa" />
+              </linearGradient>
+              <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#60a5fa" />
+                <stop offset="100%" stop-color="#a78bfa" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <h1 class="splash-title">Planify</h1>
+        <p class="splash-sub">Your premium productivity space</p>
+        <div class="splash-loader">
+          <div class="loader-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════ AUTH SCREEN ═══════════════ -->
+    <div id="auth-screen" class="hidden">
+      <div class="auth-bg"></div>
+      <div class="auth-orb a1"></div>
+      <div class="auth-orb a2"></div>
+
+      <div class="auth-container">
+        <div class="auth-brand">
+          <svg class="brand-icon" viewBox="0 0 48 48" fill="none">
+            <rect x="4" y="4" width="18" height="18" rx="5" fill="url(#ag1)" />
+            <rect
+              x="26"
+              y="4"
+              width="18"
+              height="18"
+              rx="5"
+              fill="url(#ag2)"
+              opacity="0.7"
+            />
+            <rect
+              x="4"
+              y="26"
+              width="18"
+              height="18"
+              rx="5"
+              fill="url(#ag2)"
+              opacity="0.7"
+            />
+            <rect
+              x="26"
+              y="26"
+              width="18"
+              height="18"
+              rx="5"
+              fill="url(#ag1)"
+            />
+            <defs>
+              <linearGradient id="ag1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#a78bfa" />
+                <stop offset="100%" stop-color="#60a5fa" />
+              </linearGradient>
+              <linearGradient id="ag2" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#60a5fa" />
+                <stop offset="100%" stop-color="#a78bfa" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <span>Planify</span>
+        </div>
+
+        <!-- TAB SWITCH -->
+        <div class="auth-tabs">
+          <button class="auth-tab active" data-tab="login">Giriş Yap</button>
+          <button class="auth-tab" data-tab="register">Kayıt Ol</button>
+        </div>
+
+        <!-- LOGIN PANEL -->
+        <div class="auth-panel" id="panel-login">
+          <div class="social-btns">
+            <button
+              class="social-btn google"
+              onclick="App.socialLogin('Google')"
+            >
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                  fill="#4285F4"
+                />
+                <path
+                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                  fill="#34A853"
+                />
+                <path
+                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                  fill="#FBBC05"
+                />
+                <path
+                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                  fill="#EA4335"
+                />
+              </svg>
+              Google ile Devam Et
+            </button>
+            <button
+              class="social-btn facebook"
+              onclick="App.socialLogin('Facebook')"
+            >
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                  fill="#1877F2"
+                />
+              </svg>
+              Facebook ile Devam Et
+            </button>
+          </div>
+
+          <div class="divider"><span>veya e-posta ile</span></div>
+
+          <div class="form-group">
+            <label>E-posta</label>
+            <div class="input-wrap">
+              <i class="fa fa-envelope"></i>
+              <input
+                type="email"
+                id="login-email"
+                placeholder="ornek@email.com"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Şifre</label>
+            <div class="input-wrap">
+              <i class="fa fa-lock"></i>
+              <input type="password" id="login-pass" placeholder="••••••••" />
+              <button class="toggle-pass" onclick="App.togglePass(this)">
+                <i class="fa fa-eye"></i>
+              </button>
+            </div>
+          </div>
+          <button class="btn-primary ripple" onclick="App.login()">
+            Giriş Yap <i class="fa fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <!-- REGISTER PANEL -->
+        <div class="auth-panel hidden" id="panel-register">
+          <div class="social-btns">
+            <button
+              class="social-btn google"
+              onclick="App.socialLogin('Google')"
+            >
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                  fill="#4285F4"
+                />
+                <path
+                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                  fill="#34A853"
+                />
+                <path
+                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                  fill="#FBBC05"
+                />
+                <path
+                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                  fill="#EA4335"
+                />
+              </svg>
+              Google ile Kayıt Ol
+            </button>
+            <button
+              class="social-btn facebook"
+              onclick="App.socialLogin('Facebook')"
+            >
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                  fill="#1877F2"
+                />
+              </svg>
+              Facebook ile Kayıt Ol
+            </button>
+          </div>
+
+          <div class="divider"><span>veya e-posta ile</span></div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Ad</label>
+              <div class="input-wrap">
+                <i class="fa fa-user"></i
+                ><input type="text" id="reg-firstname" placeholder="Adınız" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Soyad</label>
+              <div class="input-wrap">
+                <i class="fa fa-user"></i
+                ><input type="text" id="reg-lastname" placeholder="Soyadınız" />
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Doğum Tarihi</label>
+            <div class="input-wrap">
+              <i class="fa fa-calendar"></i><input type="date" id="reg-dob" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>E-posta</label>
+            <div class="input-wrap">
+              <i class="fa fa-envelope"></i
+              ><input
+                type="email"
+                id="reg-email"
+                placeholder="ornek@email.com"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Şifre</label>
+            <div class="input-wrap">
+              <i class="fa fa-lock"></i>
+              <input
+                type="password"
+                id="reg-pass"
+                placeholder="En az 6 karakter"
+              />
+              <button class="toggle-pass" onclick="App.togglePass(this)">
+                <i class="fa fa-eye"></i>
+              </button>
+            </div>
+          </div>
+          <button class="btn-primary ripple" onclick="App.register()">
+            Hesap Oluştur <i class="fa fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════ DASHBOARD ═══════════════ -->
+    <div id="dashboard" class="hidden">
+      <!-- SIDEBAR -->
+      <aside id="sidebar">
+        <div class="sidebar-brand">
+          <svg viewBox="0 0 48 48" fill="none">
+            <rect x="4" y="4" width="18" height="18" rx="5" fill="url(#sg1)" />
+            <rect
+              x="26"
+              y="4"
+              width="18"
+              height="18"
+              rx="5"
+              fill="url(#sg2)"
+              opacity="0.7"
+            />
+            <rect
+              x="4"
+              y="26"
+              width="18"
+              height="18"
+              rx="5"
+              fill="url(#sg2)"
+              opacity="0.7"
+            />
+            <rect
+              x="26"
+              y="26"
+              width="18"
+              height="18"
+              rx="5"
+              fill="url(#sg1)"
+            />
+            <defs>
+              <linearGradient id="sg1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#a78bfa" />
+                <stop offset="100%" stop-color="#60a5fa" />
+              </linearGradient>
+              <linearGradient id="sg2" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#60a5fa" />
+                <stop offset="100%" stop-color="#a78bfa" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <span>Planify</span>
+        </div>
+
+        <div class="sidebar-user">
+          <div class="user-avatar" id="user-avatar-initial"></div>
+          <div class="user-info">
+            <span class="user-name" id="sidebar-username"></span>
+            <span class="user-badge">Pro</span>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <p class="nav-label">Görevler</p>
+          <a
+            class="nav-item active"
+            data-filter="all"
+            onclick="App.setFilter('all', this)"
+          >
+            <i class="fa fa-bolt"></i> <span>Tüm Görevler</span>
+            <span class="nav-count" id="cnt-all">0</span>
+          </a>
+          <a
+            class="nav-item"
+            data-filter="active"
+            onclick="App.setFilter('active', this)"
+          >
+            <i class="fa fa-circle-play"></i> <span>Aktif Görevler</span>
+            <span class="nav-count" id="cnt-active">0</span>
+          </a>
+          <a
+            class="nav-item"
+            data-filter="daily"
+            onclick="App.setFilter('daily', this)"
+          >
+            <i class="fa fa-sun"></i> <span>Günlük</span>
+            <span class="nav-count" id="cnt-daily">0</span>
+          </a>
+          <a
+            class="nav-item"
+            data-filter="weekly"
+            onclick="App.setFilter('weekly', this)"
+          >
+            <i class="fa fa-calendar-week"></i> <span>Haftalık</span>
+            <span class="nav-count" id="cnt-weekly">0</span>
+          </a>
+          <a
+            class="nav-item"
+            data-filter="monthly"
+            onclick="App.setFilter('monthly', this)"
+          >
+            <i class="fa fa-calendar-days"></i> <span>Aylık</span>
+            <span class="nav-count" id="cnt-monthly">0</span>
+          </a>
+          <a
+            class="nav-item"
+            data-filter="yearly"
+            onclick="App.setFilter('yearly', this)"
+          >
+            <i class="fa fa-calendar"></i> <span>Yıllık</span>
+            <span class="nav-count" id="cnt-yearly">0</span>
+          </a>
+
+          <p class="nav-label" style="margin-top: 24px">Durum</p>
+          <a
+            class="nav-item"
+            data-filter="completed"
+            onclick="App.setFilter('completed', this)"
+          >
+            <i class="fa fa-circle-check"></i> <span>Tamamlanan</span>
+            <span class="nav-count" id="cnt-completed">0</span>
+          </a>
+        </nav>
+
+        <button class="sidebar-logout ripple" onclick="App.logout()">
+          <i class="fa fa-right-from-bracket"></i> Çıkış Yap
+        </button>
+      </aside>
+
+      <!-- MOBILE OVERLAY -->
+      <div
+        class="sidebar-overlay"
+        id="sidebar-overlay"
+        onclick="App.closeSidebar()"
+      ></div>
+
+      <!-- MAIN CONTENT -->
+      <main class="main-content">
+        <!-- TOP BAR -->
+        <header class="topbar">
+          <div class="topbar-left">
+            <button class="hamburger" onclick="App.toggleSidebar()">
+              <i class="fa fa-bars"></i>
+            </button>
+            <div>
+              <h2 class="topbar-title" id="topbar-title">Tüm Görevler</h2>
+              <p class="topbar-date" id="topbar-date"></p>
+            </div>
+          </div>
+          <div class="topbar-right">
+            <div class="search-box">
+              <i class="fa fa-search"></i>
+              <input
+                type="text"
+                placeholder="Görev ara..."
+                id="search-input"
+                oninput="App.search(this.value)"
+              />
+            </div>
+            <div class="topbar-avatar" id="topbar-avatar"></div>
+          </div>
+        </header>
+
+        <!-- STATS ROW -->
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-icon" style="--c: #a78bfa">
+              <i class="fa fa-list-check"></i>
+            </div>
+            <div>
+              <p class="stat-val" id="stat-total">0</p>
+              <p class="stat-lbl">Toplam Görev</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="--c: #34d399">
+              <i class="fa fa-circle-check"></i>
+            </div>
+            <div>
+              <p class="stat-val" id="stat-done">0</p>
+              <p class="stat-lbl">Tamamlanan</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="--c: #60a5fa">
+              <i class="fa fa-circle-play"></i>
+            </div>
+            <div>
+              <p class="stat-val" id="stat-active">0</p>
+              <p class="stat-lbl">Aktif</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="--c: #fb923c">
+              <i class="fa fa-chart-line"></i>
+            </div>
+            <div>
+              <p class="stat-val" id="stat-rate">%0</p>
+              <p class="stat-lbl">Tamamlanma Oranı</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADD TASK FORM -->
+        <div class="add-task-card">
+          <h3><i class="fa fa-plus-circle"></i> Yeni Görev Ekle</h3>
+          <div class="add-task-form">
+            <div class="form-group flex-1">
+              <div class="input-wrap">
+                <i class="fa fa-pen"></i>
+                <input
+                  type="text"
+                  id="task-title"
+                  placeholder="Görev başlığı..."
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-wrap">
+                <i class="fa fa-tag"></i>
+                <select id="task-type">
+                  <option value="daily">Günlük</option>
+                  <option value="weekly">Haftalık</option>
+                  <option value="monthly">Aylık</option>
+                  <option value="yearly">Yıllık</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-wrap">
+                <i class="fa fa-flag"></i>
+                <select id="task-priority">
+                  <option value="low">Düşük</option>
+                  <option value="medium">Orta</option>
+                  <option value="high">Yüksek</option>
+                </select>
+              </div>
+            </div>
+            <button class="btn-primary ripple" onclick="App.addTask()">
+              <i class="fa fa-plus"></i> Ekle
+            </button>
+          </div>
+          <div class="form-group" style="margin-top: 10px">
+            <div class="input-wrap">
+              <i class="fa fa-align-left"></i>
+              <input
+                type="text"
+                id="task-desc"
+                placeholder="Açıklama (isteğe bağlı)..."
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- PROGRESS BAR -->
+        <div class="progress-wrap">
+          <div class="progress-label">
+            <span>Genel İlerleme</span>
+            <span id="progress-pct">0%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+        </div>
+
+        <!-- TASK LIST -->
+        <div class="task-list-header">
+          <h3 id="task-list-label">Tüm Görevler</h3>
+          <div class="sort-btns">
+            <button
+              class="sort-btn active"
+              onclick="App.setSortBy('date', this)"
+            >
+              Tarihe Göre
+            </button>
+            <button class="sort-btn" onclick="App.setSortBy('priority', this)">
+              Önceliğe Göre
+            </button>
+            <button class="sort-btn" onclick="App.setSortBy('name', this)">
+              Ada Göre
+            </button>
+          </div>
+        </div>
+
+        <div class="task-list" id="task-list"></div>
+
+        <div class="empty-state hidden" id="empty-state">
+          <div class="empty-icon"><i class="fa fa-inbox"></i></div>
+          <h3>Görev bulunamadı</h3>
+          <p>Bu kategoride henüz görev yok. Yukarıdan ekleyebilirsin.</p>
+        </div>
+      </main>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div id="toast-container"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
