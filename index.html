@@ -1,326 +1,93 @@
 <!doctype html>
-<html lang="tr">
+<html lang="tr" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Planify – Premium Productivity</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta name="description" content="ARAZION — Premium Productivity App" />
+    <meta name="theme-color" content="#0a0a0f" />
+    <title>ARAZION</title>
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="icon-192.png" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 56'><rect x='2' y='2' width='23' height='23' rx='6' fill='%23a78bfa'/><rect x='31' y='2' width='23' height='23' rx='6' fill='%2360a5fa' opacity='.7'/><rect x='2' y='31' width='23' height='23' rx='6' fill='%2360a5fa' opacity='.7'/><rect x='31' y='31' width='23' height='23' rx='6' fill='%23a78bfa'/></svg>"
+    />
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap"
       rel="stylesheet"
     />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- ═══════════════ SPLASH SCREEN ═══════════════ -->
-    <div id="splash">
-      <div class="splash-bg"></div>
-      <div class="splash-orb orb1"></div>
-      <div class="splash-orb orb2"></div>
-      <div class="splash-orb orb3"></div>
-      <div class="splash-content">
-        <div class="splash-icon">
-          <svg
-            viewBox="0 0 48 48"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect x="4" y="4" width="18" height="18" rx="5" fill="url(#g1)" />
-            <rect
-              x="26"
-              y="4"
-              width="18"
-              height="18"
-              rx="5"
-              fill="url(#g2)"
-              opacity="0.7"
-            />
-            <rect
-              x="4"
-              y="26"
-              width="18"
-              height="18"
-              rx="5"
-              fill="url(#g2)"
-              opacity="0.7"
-            />
-            <rect x="26" y="26" width="18" height="18" rx="5" fill="url(#g1)" />
-            <defs>
-              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#a78bfa" />
-                <stop offset="100%" stop-color="#60a5fa" />
-              </linearGradient>
-              <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#60a5fa" />
-                <stop offset="100%" stop-color="#a78bfa" />
-              </linearGradient>
-            </defs>
-          </svg>
+    <!-- ══════════════════════════════════════════════
+     BY ARAZ INTRO
+══════════════════════════════════════════════ -->
+    <div id="by-araz">
+      <div class="araz-bg"></div>
+      <div class="araz-particles" id="araz-particles"></div>
+      <div class="araz-content">
+        <div class="araz-line-top"></div>
+        <div class="araz-text-wrap">
+          <span class="araz-by">by</span>
+          <span class="araz-name">Araz</span>
         </div>
-        <h1 class="splash-title">Planify</h1>
-        <p class="splash-sub">Your premium productivity space</p>
-        <div class="splash-loader">
-          <div class="loader-bar"></div>
-        </div>
+        <div class="araz-line-bottom"></div>
+        <p class="araz-sub">Premium Productivity Suite</p>
       </div>
     </div>
 
-    <!-- ═══════════════ AUTH SCREEN ═══════════════ -->
-    <div id="auth-screen" class="hidden">
-      <div class="auth-bg"></div>
-      <div class="auth-orb a1"></div>
-      <div class="auth-orb a2"></div>
-
-      <div class="auth-container">
-        <div class="auth-brand">
-          <svg class="brand-icon" viewBox="0 0 48 48" fill="none">
-            <rect x="4" y="4" width="18" height="18" rx="5" fill="url(#ag1)" />
-            <rect
-              x="26"
-              y="4"
-              width="18"
-              height="18"
-              rx="5"
-              fill="url(#ag2)"
-              opacity="0.7"
-            />
-            <rect
-              x="4"
-              y="26"
-              width="18"
-              height="18"
-              rx="5"
-              fill="url(#ag2)"
-              opacity="0.7"
-            />
-            <rect
-              x="26"
-              y="26"
-              width="18"
-              height="18"
-              rx="5"
-              fill="url(#ag1)"
-            />
-            <defs>
-              <linearGradient id="ag1" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#a78bfa" />
-                <stop offset="100%" stop-color="#60a5fa" />
-              </linearGradient>
-              <linearGradient id="ag2" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#60a5fa" />
-                <stop offset="100%" stop-color="#a78bfa" />
-              </linearGradient>
-            </defs>
-          </svg>
-          <span>Planify</span>
-        </div>
-
-        <!-- TAB SWITCH -->
-        <div class="auth-tabs">
-          <button class="auth-tab active" data-tab="login">Giriş Yap</button>
-          <button class="auth-tab" data-tab="register">Kayıt Ol</button>
-        </div>
-
-        <!-- LOGIN PANEL -->
-        <div class="auth-panel" id="panel-login">
-          <div class="social-btns">
-            <button
-              class="social-btn google"
-              onclick="App.socialLogin('Google')"
-            >
-              <svg viewBox="0 0 24 24">
-                <path
-                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                  fill="#4285F4"
-                />
-                <path
-                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                  fill="#34A853"
-                />
-                <path
-                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
-                  fill="#FBBC05"
-                />
-                <path
-                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-                  fill="#EA4335"
-                />
-              </svg>
-              Google ile Devam Et
-            </button>
-            <button
-              class="social-btn facebook"
-              onclick="App.socialLogin('Facebook')"
-            >
-              <svg viewBox="0 0 24 24">
-                <path
-                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
-                  fill="#1877F2"
-                />
-              </svg>
-              Facebook ile Devam Et
-            </button>
-          </div>
-
-          <div class="divider"><span>veya e-posta ile</span></div>
-
-          <div class="form-group">
-            <label>E-posta</label>
-            <div class="input-wrap">
-              <i class="fa fa-envelope"></i>
-              <input
-                type="email"
-                id="login-email"
-                placeholder="ornek@email.com"
-              />
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Şifre</label>
-            <div class="input-wrap">
-              <i class="fa fa-lock"></i>
-              <input type="password" id="login-pass" placeholder="••••••••" />
-              <button class="toggle-pass" onclick="App.togglePass(this)">
-                <i class="fa fa-eye"></i>
-              </button>
-            </div>
-          </div>
-          <button class="btn-primary ripple" onclick="App.login()">
-            Giriş Yap <i class="fa fa-arrow-right"></i>
-          </button>
-        </div>
-
-        <!-- REGISTER PANEL -->
-        <div class="auth-panel hidden" id="panel-register">
-          <div class="social-btns">
-            <button
-              class="social-btn google"
-              onclick="App.socialLogin('Google')"
-            >
-              <svg viewBox="0 0 24 24">
-                <path
-                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                  fill="#4285F4"
-                />
-                <path
-                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                  fill="#34A853"
-                />
-                <path
-                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
-                  fill="#FBBC05"
-                />
-                <path
-                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-                  fill="#EA4335"
-                />
-              </svg>
-              Google ile Kayıt Ol
-            </button>
-            <button
-              class="social-btn facebook"
-              onclick="App.socialLogin('Facebook')"
-            >
-              <svg viewBox="0 0 24 24">
-                <path
-                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
-                  fill="#1877F2"
-                />
-              </svg>
-              Facebook ile Kayıt Ol
-            </button>
-          </div>
-
-          <div class="divider"><span>veya e-posta ile</span></div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label>Ad</label>
-              <div class="input-wrap">
-                <i class="fa fa-user"></i
-                ><input type="text" id="reg-firstname" placeholder="Adınız" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Soyad</label>
-              <div class="input-wrap">
-                <i class="fa fa-user"></i
-                ><input type="text" id="reg-lastname" placeholder="Soyadınız" />
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Doğum Tarihi</label>
-            <div class="input-wrap">
-              <i class="fa fa-calendar"></i><input type="date" id="reg-dob" />
-            </div>
-          </div>
-          <div class="form-group">
-            <label>E-posta</label>
-            <div class="input-wrap">
-              <i class="fa fa-envelope"></i
-              ><input
-                type="email"
-                id="reg-email"
-                placeholder="ornek@email.com"
-              />
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Şifre</label>
-            <div class="input-wrap">
-              <i class="fa fa-lock"></i>
-              <input
-                type="password"
-                id="reg-pass"
-                placeholder="En az 6 karakter"
-              />
-              <button class="toggle-pass" onclick="App.togglePass(this)">
-                <i class="fa fa-eye"></i>
-              </button>
-            </div>
-          </div>
-          <button class="btn-primary ripple" onclick="App.register()">
-            Hesap Oluştur <i class="fa fa-arrow-right"></i>
-          </button>
-        </div>
+    <!-- ══════════════════════════════════════════════
+     SPLASH SCREEN
+══════════════════════════════════════════════ -->
+    <div id="splash" class="hidden">
+      <div class="splash-bg">
+        <div class="sp-orb sp-orb1"></div>
+        <div class="sp-orb sp-orb2"></div>
+        <div class="sp-orb sp-orb3"></div>
+        <div class="sp-grid"></div>
       </div>
-    </div>
-
-    <!-- ═══════════════ DASHBOARD ═══════════════ -->
-    <div id="dashboard" class="hidden">
-      <!-- SIDEBAR -->
-      <aside id="sidebar">
-        <div class="sidebar-brand">
-          <svg viewBox="0 0 48 48" fill="none">
-            <rect x="4" y="4" width="18" height="18" rx="5" fill="url(#sg1)" />
+      <div class="splash-body">
+        <div class="splash-logo-wrap">
+          <svg class="splash-icon" viewBox="0 0 56 56" fill="none">
+            <rect x="2" y="2" width="23" height="23" rx="6" fill="url(#sg1)" />
             <rect
-              x="26"
-              y="4"
-              width="18"
-              height="18"
-              rx="5"
+              x="31"
+              y="2"
+              width="23"
+              height="23"
+              rx="6"
               fill="url(#sg2)"
-              opacity="0.7"
+              opacity=".7"
             />
             <rect
-              x="4"
-              y="26"
-              width="18"
-              height="18"
-              rx="5"
+              x="2"
+              y="31"
+              width="23"
+              height="23"
+              rx="6"
               fill="url(#sg2)"
-              opacity="0.7"
+              opacity=".7"
             />
             <rect
-              x="26"
-              y="26"
-              width="18"
-              height="18"
-              rx="5"
+              x="31"
+              y="31"
+              width="23"
+              height="23"
+              rx="6"
               fill="url(#sg1)"
             />
             <defs>
@@ -334,251 +101,1459 @@
               </linearGradient>
             </defs>
           </svg>
-          <span>Planify</span>
+          <div class="splash-ring"></div>
         </div>
+        <h1 class="splash-title">ARAZION</h1>
+        <p class="splash-tagline">Your Premium Productivity Universe</p>
+        <div class="splash-progress">
+          <div class="splash-progress-fill" id="splash-fill"></div>
+        </div>
+        <p class="splash-status" id="splash-status">Başlatılıyor...</p>
+      </div>
+    </div>
 
-        <div class="sidebar-user">
-          <div class="user-avatar" id="user-avatar-initial"></div>
-          <div class="user-info">
-            <span class="user-name" id="sidebar-username"></span>
-            <span class="user-badge">Pro</span>
+    <!-- ══════════════════════════════════════════════
+     AUTH SCREEN
+══════════════════════════════════════════════ -->
+    <div id="auth-screen" class="hidden">
+      <div class="auth-bg">
+        <div class="auth-orb auth-orb1"></div>
+        <div class="auth-orb auth-orb2"></div>
+        <div class="auth-grid"></div>
+      </div>
+
+      <div class="auth-container">
+        <!-- LEFT PANEL -->
+        <div class="auth-left">
+          <div class="auth-brand">
+            <svg viewBox="0 0 56 56" fill="none" width="44">
+              <rect
+                x="2"
+                y="2"
+                width="23"
+                height="23"
+                rx="6"
+                fill="url(#al1)"
+              />
+              <rect
+                x="31"
+                y="2"
+                width="23"
+                height="23"
+                rx="6"
+                fill="url(#al2)"
+                opacity=".7"
+              />
+              <rect
+                x="2"
+                y="31"
+                width="23"
+                height="23"
+                rx="6"
+                fill="url(#al2)"
+                opacity=".7"
+              />
+              <rect
+                x="31"
+                y="31"
+                width="23"
+                height="23"
+                rx="6"
+                fill="url(#al1)"
+              />
+              <defs>
+                <linearGradient id="al1" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#a78bfa" />
+                  <stop offset="100%" stop-color="#60a5fa" />
+                </linearGradient>
+                <linearGradient id="al2" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#60a5fa" />
+                  <stop offset="100%" stop-color="#a78bfa" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <span>ARAZION</span>
+          </div>
+          <h2 class="auth-headline">
+            Üretkenliğini<br />bir üst seviyeye<br />taşı.
+          </h2>
+          <div class="auth-features">
+            <div class="af-item">
+              <i class="fa fa-check-circle"></i
+              ><span>Görev & Hedef Yönetimi</span>
+            </div>
+            <div class="af-item">
+              <i class="fa fa-check-circle"></i><span>Takvim & Planlama</span>
+            </div>
+            <div class="af-item">
+              <i class="fa fa-check-circle"></i><span>AI Asistan Desteği</span>
+            </div>
+            <div class="af-item">
+              <i class="fa fa-check-circle"></i
+              ><span>Bulut Senkronizasyonu</span>
+            </div>
+            <div class="af-item">
+              <i class="fa fa-check-circle"></i><span>Oyunlaştırma & XP</span>
+            </div>
           </div>
         </div>
 
-        <nav class="sidebar-nav">
+        <!-- RIGHT PANEL -->
+        <div class="auth-right">
+          <div class="auth-box">
+            <!-- TABS -->
+            <div class="auth-tabs">
+              <button class="auth-tab active" data-tab="login">
+                Giriş Yap
+              </button>
+              <button class="auth-tab" data-tab="register">Kayıt Ol</button>
+            </div>
+
+            <!-- LOGIN -->
+            <div class="auth-panel" id="panel-login">
+              <div class="social-btns">
+                <button class="social-btn ripple" onclick="Auth.googleLogin()">
+                  <svg viewBox="0 0 24 24" width="18">
+                    <path
+                      d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                      fill="#4285F4"
+                    />
+                    <path
+                      d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                      fill="#34A853"
+                    />
+                    <path
+                      d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                      fill="#FBBC05"
+                    />
+                    <path
+                      d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                      fill="#EA4335"
+                    />
+                  </svg>
+                  Google ile Devam Et
+                </button>
+              </div>
+              <div class="divider"><span>veya e-posta ile</span></div>
+              <div class="form-group">
+                <label>E-posta</label>
+                <div class="input-wrap">
+                  <i class="fa fa-envelope"></i
+                  ><input
+                    type="email"
+                    id="l-email"
+                    placeholder="ornek@email.com"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Şifre</label>
+                <div class="input-wrap">
+                  <i class="fa fa-lock"></i>
+                  <input type="password" id="l-pass" placeholder="••••••••" />
+                  <button class="eye-btn" onclick="UI.togglePass(this)">
+                    <i class="fa fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="form-row-flex">
+                <label class="remember-label">
+                  <input type="checkbox" id="remember-me" /> Beni hatırla
+                </label>
+                <button class="forgot-btn" onclick="Auth.forgotPassword()">
+                  Şifremi unuttum
+                </button>
+              </div>
+              <button
+                class="btn-primary ripple"
+                onclick="Auth.login()"
+                id="btn-login"
+              >
+                <span>Giriş Yap</span><i class="fa fa-arrow-right"></i>
+              </button>
+              <div class="auth-error hidden" id="login-error"></div>
+            </div>
+
+            <!-- REGISTER -->
+            <div class="auth-panel hidden" id="panel-register">
+              <div class="social-btns">
+                <button class="social-btn ripple" onclick="Auth.googleLogin()">
+                  <svg viewBox="0 0 24 24" width="18">
+                    <path
+                      d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                      fill="#4285F4"
+                    />
+                    <path
+                      d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                      fill="#34A853"
+                    />
+                    <path
+                      d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                      fill="#FBBC05"
+                    />
+                    <path
+                      d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                      fill="#EA4335"
+                    />
+                  </svg>
+                  Google ile Kayıt Ol
+                </button>
+              </div>
+              <div class="divider"><span>veya e-posta ile</span></div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Ad</label>
+                  <div class="input-wrap">
+                    <i class="fa fa-user"></i
+                    ><input type="text" id="r-fn" placeholder="Adınız" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Soyad</label>
+                  <div class="input-wrap">
+                    <i class="fa fa-user"></i
+                    ><input type="text" id="r-ln" placeholder="Soyadınız" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Doğum Tarihi</label>
+                <div class="input-wrap">
+                  <i class="fa fa-calendar"></i><input type="date" id="r-dob" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>E-posta</label>
+                <div class="input-wrap">
+                  <i class="fa fa-envelope"></i
+                  ><input
+                    type="email"
+                    id="r-email"
+                    placeholder="ornek@email.com"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Şifre</label>
+                <div class="input-wrap">
+                  <i class="fa fa-lock"></i>
+                  <input
+                    type="password"
+                    id="r-pass"
+                    placeholder="En az 8 karakter"
+                  />
+                  <button class="eye-btn" onclick="UI.togglePass(this)">
+                    <i class="fa fa-eye"></i>
+                  </button>
+                </div>
+                <div class="pass-strength" id="pass-strength">
+                  <div class="ps-bar" id="ps-bar"></div>
+                </div>
+                <p class="ps-label" id="ps-label"></p>
+              </div>
+              <button
+                class="btn-primary ripple"
+                onclick="Auth.register()"
+                id="btn-register"
+              >
+                <span>Hesap Oluştur</span><i class="fa fa-arrow-right"></i>
+              </button>
+              <div class="auth-error hidden" id="register-error"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════
+     ONBOARDING WIZARD
+══════════════════════════════════════════════ -->
+    <div id="onboarding" class="hidden">
+      <div class="ob-bg">
+        <div class="ob-orb ob-orb1"></div>
+        <div class="ob-orb ob-orb2"></div>
+      </div>
+      <div class="ob-container">
+        <div class="ob-progress-bar">
+          <div class="ob-progress-fill" id="ob-progress"></div>
+        </div>
+        <div class="ob-step-labels">
+          <span class="ob-step-label active" data-step="0">Hoşgeldin</span>
+          <span class="ob-step-label" data-step="1">Hedefler</span>
+          <span class="ob-step-label" data-step="2">Görevler</span>
+          <span class="ob-step-label" data-step="3">Tema</span>
+          <span class="ob-step-label" data-step="4">Hazır!</span>
+        </div>
+
+        <!-- STEP 0: Welcome -->
+        <div class="ob-panel" id="ob-0">
+          <div class="ob-welcome-icon">
+            <svg viewBox="0 0 56 56" fill="none" width="64">
+              <rect
+                x="2"
+                y="2"
+                width="23"
+                height="23"
+                rx="6"
+                fill="url(#ow1)"
+              />
+              <rect
+                x="31"
+                y="2"
+                width="23"
+                height="23"
+                rx="6"
+                fill="url(#ow2)"
+                opacity=".7"
+              />
+              <rect
+                x="2"
+                y="31"
+                width="23"
+                height="23"
+                rx="6"
+                fill="url(#ow2)"
+                opacity=".7"
+              />
+              <rect
+                x="31"
+                y="31"
+                width="23"
+                height="23"
+                rx="6"
+                fill="url(#ow1)"
+              />
+              <defs>
+                <linearGradient id="ow1" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#a78bfa" />
+                  <stop offset="100%" stop-color="#60a5fa" />
+                </linearGradient>
+                <linearGradient id="ow2" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#60a5fa" />
+                  <stop offset="100%" stop-color="#a78bfa" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <h2>ARAZION'a Hoşgeldin, <span id="ob-username"></span>!</h2>
+          <p>
+            Seni tanımak için birkaç hızlı soru soracağız. Bu kurulum yalnızca
+            bir kez yapılır ve deneyimini kişiselleştirir.
+          </p>
+          <div class="ob-cards-row">
+            <div class="ob-feature-card">
+              <i class="fa fa-bolt"></i><span>Görev Yönetimi</span>
+            </div>
+            <div class="ob-feature-card">
+              <i class="fa fa-calendar"></i><span>Takvim</span>
+            </div>
+            <div class="ob-feature-card">
+              <i class="fa fa-book"></i><span>Not Defteri</span>
+            </div>
+            <div class="ob-feature-card">
+              <i class="fa fa-robot"></i><span>AI Asistan</span>
+            </div>
+            <div class="ob-feature-card">
+              <i class="fa fa-trophy"></i><span>Başarımlar</span>
+            </div>
+            <div class="ob-feature-card">
+              <i class="fa fa-fire"></i><span>XP Sistemi</span>
+            </div>
+          </div>
+          <button class="btn-primary ripple" onclick="Onboarding.next()">
+            Başlayalım <i class="fa fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <!-- STEP 1: Goals -->
+        <div class="ob-panel hidden" id="ob-1">
+          <div class="ob-step-icon"><i class="fa fa-bullseye"></i></div>
+          <h2>Hedeflerini Seç</h2>
+          <p>
+            Hangi alanlarda gelişmek istiyorsun? (Birden fazla seçebilirsin)
+          </p>
+          <div class="ob-goals-grid" id="ob-goals-grid">
+            <div class="goal-chip" data-goal="kariyer">
+              <i class="fa fa-briefcase"></i> Kariyer
+            </div>
+            <div class="goal-chip" data-goal="saglik">
+              <i class="fa fa-heart-pulse"></i> Sağlık & Spor
+            </div>
+            <div class="goal-chip" data-goal="egitim">
+              <i class="fa fa-graduation-cap"></i> Eğitim
+            </div>
+            <div class="goal-chip" data-goal="finans">
+              <i class="fa fa-coins"></i> Finans
+            </div>
+            <div class="goal-chip" data-goal="iliski">
+              <i class="fa fa-people-group"></i> İlişkiler
+            </div>
+            <div class="goal-chip" data-goal="yaraticilik">
+              <i class="fa fa-palette"></i> Yaratıcılık
+            </div>
+            <div class="goal-chip" data-goal="zihniyet">
+              <i class="fa fa-brain"></i> Zihniyet
+            </div>
+            <div class="goal-chip" data-goal="seyahat">
+              <i class="fa fa-plane"></i> Seyahat
+            </div>
+          </div>
+          <div class="ob-nav">
+            <button class="btn-ghost ripple" onclick="Onboarding.prev()">
+              <i class="fa fa-arrow-left"></i> Geri
+            </button>
+            <button class="btn-primary ripple" onclick="Onboarding.next()">
+              Devam <i class="fa fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2: Initial tasks -->
+        <div class="ob-panel hidden" id="ob-2">
+          <div class="ob-step-icon"><i class="fa fa-list-check"></i></div>
+          <h2>Başlangıç Görevlerin</h2>
+          <p>Her kategoriden birkaç görev ekle. İstediğini atlayabilirsin.</p>
+          <div class="ob-task-tabs">
+            <button
+              class="ob-ttab active"
+              data-type="daily"
+              onclick="Onboarding.setTaskType('daily', this)"
+            >
+              <i class="fa fa-sun"></i> Günlük
+            </button>
+            <button
+              class="ob-ttab"
+              data-type="weekly"
+              onclick="Onboarding.setTaskType('weekly', this)"
+            >
+              <i class="fa fa-calendar-week"></i> Haftalık
+            </button>
+            <button
+              class="ob-ttab"
+              data-type="monthly"
+              onclick="Onboarding.setTaskType('monthly', this)"
+            >
+              <i class="fa fa-calendar-days"></i> Aylık
+            </button>
+            <button
+              class="ob-ttab"
+              data-type="yearly"
+              onclick="Onboarding.setTaskType('yearly', this)"
+            >
+              <i class="fa fa-calendar"></i> Yıllık
+            </button>
+          </div>
+          <div class="ob-task-input-row">
+            <div class="input-wrap flex1">
+              <i class="fa fa-pen"></i
+              ><input
+                type="text"
+                id="ob-task-inp"
+                placeholder="Görev yaz, Enter'a bas..."
+              />
+            </div>
+          </div>
+          <div class="ob-task-list" id="ob-task-list"></div>
+          <div class="ob-nav">
+            <button class="btn-ghost ripple" onclick="Onboarding.prev()">
+              <i class="fa fa-arrow-left"></i> Geri
+            </button>
+            <button class="btn-primary ripple" onclick="Onboarding.next()">
+              Devam <i class="fa fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Theme -->
+        <div class="ob-panel hidden" id="ob-3">
+          <div class="ob-step-icon"><i class="fa fa-palette"></i></div>
+          <h2>Temanı Seç</h2>
+          <p>Sonradan ayarlardan değiştirebilirsin.</p>
+          <div class="theme-picker">
+            <div
+              class="tp-card active"
+              data-theme="dark"
+              onclick="Onboarding.pickTheme('dark', this)"
+            >
+              <div class="tp-preview tp-dark">
+                <div class="tp-dot"></div>
+                <div class="tp-dot"></div>
+                <div class="tp-dot"></div>
+              </div>
+              <span>Dark (Glassmorphism)</span>
+              <i class="fa fa-check tp-check"></i>
+            </div>
+            <div
+              class="tp-card"
+              data-theme="light"
+              onclick="Onboarding.pickTheme('light', this)"
+            >
+              <div class="tp-preview tp-light">
+                <div class="tp-dot"></div>
+                <div class="tp-dot"></div>
+                <div class="tp-dot"></div>
+              </div>
+              <span>Light</span>
+              <i class="fa fa-check tp-check"></i>
+            </div>
+            <div
+              class="tp-card"
+              data-theme="bw"
+              onclick="Onboarding.pickTheme('bw', this)"
+            >
+              <div class="tp-preview tp-bw">
+                <div class="tp-dot"></div>
+                <div class="tp-dot"></div>
+                <div class="tp-dot"></div>
+              </div>
+              <span>Siyah & Beyaz</span>
+              <i class="fa fa-check tp-check"></i>
+            </div>
+          </div>
+          <div class="ob-nav">
+            <button class="btn-ghost ripple" onclick="Onboarding.prev()">
+              <i class="fa fa-arrow-left"></i> Geri
+            </button>
+            <button class="btn-primary ripple" onclick="Onboarding.next()">
+              Devam <i class="fa fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 4: Ready -->
+        <div class="ob-panel hidden" id="ob-4">
+          <div class="ob-ready-anim">
+            <div class="ready-circle"><i class="fa fa-check"></i></div>
+          </div>
+          <h2>Hazırsın! 🎉</h2>
+          <p>
+            Hesabın ve başlangıç görevlerin hazırlandı. ARAZION'u keşfetmeye
+            başla!
+          </p>
+          <div class="ob-summary" id="ob-summary"></div>
+          <button class="btn-primary ripple" onclick="Onboarding.finish()">
+            ARAZION'a Gir <i class="fa fa-rocket"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════
+     DASHBOARD
+══════════════════════════════════════════════ -->
+    <div id="dashboard" class="hidden">
+      <!-- SIDEBAR -->
+      <aside id="sidebar">
+        <div class="sb-top">
+          <div class="sb-brand">
+            <svg viewBox="0 0 56 56" fill="none" width="28">
+              <rect
+                x="2"
+                y="2"
+                width="23"
+                height="23"
+                rx="6"
+                fill="url(#sb1)"
+              />
+              <rect
+                x="31"
+                y="2"
+                width="23"
+                height="23"
+                rx="6"
+                fill="url(#sb2)"
+                opacity=".7"
+              />
+              <rect
+                x="2"
+                y="31"
+                width="23"
+                height="23"
+                rx="6"
+                fill="url(#sb2)"
+                opacity=".7"
+              />
+              <rect
+                x="31"
+                y="31"
+                width="23"
+                height="23"
+                rx="6"
+                fill="url(#sb1)"
+              />
+              <defs>
+                <linearGradient id="sb1" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#a78bfa" />
+                  <stop offset="100%" stop-color="#60a5fa" />
+                </linearGradient>
+                <linearGradient id="sb2" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#60a5fa" />
+                  <stop offset="100%" stop-color="#a78bfa" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <span>ARAZION</span>
+          </div>
+
+          <!-- XP Bar -->
+          <div class="sb-xp" id="sb-xp-bar">
+            <div class="xp-top">
+              <span class="xp-level" id="xp-level-badge">Lv.1</span>
+              <span class="xp-val" id="xp-val">0 / 100 XP</span>
+            </div>
+            <div class="xp-bar"><div class="xp-fill" id="xp-fill"></div></div>
+          </div>
+
+          <!-- User -->
+          <div class="sb-user" onclick="App.showSection('profile')">
+            <div class="sb-avatar-wrap">
+              <div class="sb-avatar" id="sb-avatar"></div>
+              <div class="sb-status-dot"></div>
+            </div>
+            <div class="sb-uinfo">
+              <span id="sb-name"></span>
+              <div class="sb-badges">
+                <span class="badge-pro">PRO</span>
+                <span class="streak-badge" id="sb-streak"
+                  ><i class="fa fa-fire"></i>
+                  <span id="streak-val">0</span></span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- NAV -->
+        <nav class="sb-nav">
           <p class="nav-label">Görevler</p>
           <a
             class="nav-item active"
+            onclick="
+              App.showSection('tasks');
+              Tasks.setFilter('all', this);
+            "
             data-filter="all"
-            onclick="App.setFilter('all', this)"
           >
-            <i class="fa fa-bolt"></i> <span>Tüm Görevler</span>
-            <span class="nav-count" id="cnt-all">0</span>
+            <i class="fa fa-bolt"></i><span>Tüm Görevler</span
+            ><em id="c-all">0</em>
           </a>
           <a
             class="nav-item"
+            onclick="
+              App.showSection('tasks');
+              Tasks.setFilter('active', this);
+            "
             data-filter="active"
-            onclick="App.setFilter('active', this)"
           >
-            <i class="fa fa-circle-play"></i> <span>Aktif Görevler</span>
-            <span class="nav-count" id="cnt-active">0</span>
+            <i class="fa fa-circle-play"></i><span>Aktif</span
+            ><em id="c-active">0</em>
           </a>
           <a
             class="nav-item"
+            onclick="
+              App.showSection('tasks');
+              Tasks.setFilter('daily', this);
+            "
             data-filter="daily"
-            onclick="App.setFilter('daily', this)"
           >
-            <i class="fa fa-sun"></i> <span>Günlük</span>
-            <span class="nav-count" id="cnt-daily">0</span>
+            <i class="fa fa-sun"></i><span>Günlük</span><em id="c-daily">0</em>
           </a>
           <a
             class="nav-item"
+            onclick="
+              App.showSection('tasks');
+              Tasks.setFilter('weekly', this);
+            "
             data-filter="weekly"
-            onclick="App.setFilter('weekly', this)"
           >
-            <i class="fa fa-calendar-week"></i> <span>Haftalık</span>
-            <span class="nav-count" id="cnt-weekly">0</span>
+            <i class="fa fa-calendar-week"></i><span>Haftalık</span
+            ><em id="c-weekly">0</em>
           </a>
           <a
             class="nav-item"
+            onclick="
+              App.showSection('tasks');
+              Tasks.setFilter('monthly', this);
+            "
             data-filter="monthly"
-            onclick="App.setFilter('monthly', this)"
           >
-            <i class="fa fa-calendar-days"></i> <span>Aylık</span>
-            <span class="nav-count" id="cnt-monthly">0</span>
+            <i class="fa fa-calendar-days"></i><span>Aylık</span
+            ><em id="c-monthly">0</em>
           </a>
           <a
             class="nav-item"
+            onclick="
+              App.showSection('tasks');
+              Tasks.setFilter('yearly', this);
+            "
             data-filter="yearly"
-            onclick="App.setFilter('yearly', this)"
           >
-            <i class="fa fa-calendar"></i> <span>Yıllık</span>
-            <span class="nav-count" id="cnt-yearly">0</span>
+            <i class="fa fa-calendar"></i><span>Yıllık</span
+            ><em id="c-yearly">0</em>
+          </a>
+          <a
+            class="nav-item"
+            onclick="
+              App.showSection('tasks');
+              Tasks.setFilter('completed', this);
+            "
+            data-filter="completed"
+          >
+            <i class="fa fa-circle-check"></i><span>Tamamlanan</span
+            ><em id="c-done">0</em>
           </a>
 
-          <p class="nav-label" style="margin-top: 24px">Durum</p>
-          <a
-            class="nav-item"
-            data-filter="completed"
-            onclick="App.setFilter('completed', this)"
-          >
-            <i class="fa fa-circle-check"></i> <span>Tamamlanan</span>
-            <span class="nav-count" id="cnt-completed">0</span>
+          <p class="nav-label" style="margin-top: 18px">Araçlar</p>
+          <a class="nav-item" onclick="App.showSection('calendar')">
+            <i class="fa fa-calendar-alt"></i><span>Takvim</span>
+          </a>
+          <a class="nav-item" onclick="App.showSection('notes')">
+            <i class="fa fa-book"></i><span>Not Defteri</span>
+          </a>
+          <a class="nav-item" onclick="App.showSection('pomodoro')">
+            <i class="fa fa-clock"></i><span>Pomodoro</span>
+          </a>
+          <a class="nav-item" onclick="App.showSection('ai')">
+            <i class="fa fa-robot"></i><span>AI Asistan</span>
+            <span class="nav-badge-new">YENİ</span>
+          </a>
+
+          <p class="nav-label" style="margin-top: 18px">Hesap</p>
+          <a class="nav-item" onclick="App.showSection('achievements')">
+            <i class="fa fa-trophy"></i><span>Başarımlar</span>
+          </a>
+          <a class="nav-item" onclick="App.showSection('profile')">
+            <i class="fa fa-user-circle"></i><span>Profil</span>
+          </a>
+          <a class="nav-item" onclick="App.showSection('settings')">
+            <i class="fa fa-gear"></i><span>Ayarlar</span>
           </a>
         </nav>
 
-        <button class="sidebar-logout ripple" onclick="App.logout()">
+        <button class="sb-logout ripple" onclick="Auth.logout()">
           <i class="fa fa-right-from-bracket"></i> Çıkış Yap
         </button>
       </aside>
 
-      <!-- MOBILE OVERLAY -->
       <div
         class="sidebar-overlay"
         id="sidebar-overlay"
         onclick="App.closeSidebar()"
       ></div>
 
-      <!-- MAIN CONTENT -->
+      <!-- MAIN -->
       <main class="main-content">
-        <!-- TOP BAR -->
+        <!-- TOPBAR -->
         <header class="topbar">
-          <div class="topbar-left">
-            <button class="hamburger" onclick="App.toggleSidebar()">
+          <div class="tb-left">
+            <button class="hamburger ripple" onclick="App.toggleSidebar()">
               <i class="fa fa-bars"></i>
             </button>
             <div>
-              <h2 class="topbar-title" id="topbar-title">Tüm Görevler</h2>
-              <p class="topbar-date" id="topbar-date"></p>
+              <h2 class="page-title" id="page-title">Tüm Görevler</h2>
+              <p class="page-date" id="page-date"></p>
             </div>
           </div>
-          <div class="topbar-right">
-            <div class="search-box">
+          <div class="tb-right">
+            <div class="search-box" id="search-box">
               <i class="fa fa-search"></i>
               <input
                 type="text"
-                placeholder="Görev ara..."
-                id="search-input"
-                oninput="App.search(this.value)"
+                placeholder="Ara..."
+                id="search-inp"
+                oninput="Tasks.search(this.value)"
               />
             </div>
-            <div class="topbar-avatar" id="topbar-avatar"></div>
+            <button
+              class="notif-btn ripple"
+              onclick="Notifications.showPanel()"
+              id="notif-btn"
+            >
+              <i class="fa fa-bell"></i>
+              <span class="notif-dot hidden" id="notif-dot"></span>
+            </button>
+            <div
+              class="tb-avatar ripple"
+              id="tb-avatar"
+              onclick="App.showSection('profile')"
+            ></div>
           </div>
         </header>
 
-        <!-- STATS ROW -->
-        <div class="stats-row">
-          <div class="stat-card">
-            <div class="stat-icon" style="--c: #a78bfa">
-              <i class="fa fa-list-check"></i>
-            </div>
-            <div>
-              <p class="stat-val" id="stat-total">0</p>
-              <p class="stat-lbl">Toplam Görev</p>
-            </div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon" style="--c: #34d399">
-              <i class="fa fa-circle-check"></i>
-            </div>
-            <div>
-              <p class="stat-val" id="stat-done">0</p>
-              <p class="stat-lbl">Tamamlanan</p>
-            </div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon" style="--c: #60a5fa">
-              <i class="fa fa-circle-play"></i>
-            </div>
-            <div>
-              <p class="stat-val" id="stat-active">0</p>
-              <p class="stat-lbl">Aktif</p>
-            </div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-icon" style="--c: #fb923c">
-              <i class="fa fa-chart-line"></i>
-            </div>
-            <div>
-              <p class="stat-val" id="stat-rate">%0</p>
-              <p class="stat-lbl">Tamamlanma Oranı</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- ADD TASK FORM -->
-        <div class="add-task-card">
-          <h3><i class="fa fa-plus-circle"></i> Yeni Görev Ekle</h3>
-          <div class="add-task-form">
-            <div class="form-group flex-1">
-              <div class="input-wrap">
-                <i class="fa fa-pen"></i>
-                <input
-                  type="text"
-                  id="task-title"
-                  placeholder="Görev başlığı..."
-                />
+        <!-- ── TASKS ── -->
+        <section id="sec-tasks">
+          <!-- Stats -->
+          <div class="stats-row">
+            <div class="stat-card">
+              <div class="stat-icon si-purple">
+                <i class="fa fa-list-check"></i>
+              </div>
+              <div>
+                <p class="sv" id="st-total">0</p>
+                <p class="sl">Toplam Görev</p>
               </div>
             </div>
-            <div class="form-group">
+            <div class="stat-card">
+              <div class="stat-icon si-green">
+                <i class="fa fa-circle-check"></i>
+              </div>
+              <div>
+                <p class="sv" id="st-done">0</p>
+                <p class="sl">Tamamlanan</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon si-blue">
+                <i class="fa fa-circle-play"></i>
+              </div>
+              <div>
+                <p class="sv" id="st-active">0</p>
+                <p class="sl">Aktif</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon si-orange">
+                <i class="fa fa-chart-line"></i>
+              </div>
+              <div>
+                <p class="sv" id="st-rate">%0</p>
+                <p class="sl">Tamamlanma</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Progress -->
+          <div class="progress-section">
+            <div class="prog-label">
+              <span>Genel İlerleme</span><span id="prog-pct">0%</span>
+            </div>
+            <div class="prog-bar">
+              <div class="prog-fill" id="prog-fill"></div>
+            </div>
+          </div>
+
+          <!-- Add Task -->
+          <div class="add-task-card">
+            <div class="atc-header">
+              <h3><i class="fa fa-plus-circle"></i> Yeni Görev</h3>
+              <button
+                class="btn-voice ripple"
+                onclick="Tasks.voiceInput()"
+                title="Sesle ekle"
+              >
+                <i class="fa fa-microphone"></i>
+              </button>
+            </div>
+            <div class="add-form">
+              <div class="input-wrap flex1">
+                <i class="fa fa-pen"></i
+                ><input
+                  type="text"
+                  id="t-title"
+                  placeholder="Görev başlığı..."
+                  onkeydown="if (event.key === 'Enter') Tasks.addTask();"
+                />
+              </div>
               <div class="input-wrap">
                 <i class="fa fa-tag"></i>
-                <select id="task-type">
+                <select id="t-type">
                   <option value="daily">Günlük</option>
                   <option value="weekly">Haftalık</option>
                   <option value="monthly">Aylık</option>
                   <option value="yearly">Yıllık</option>
                 </select>
               </div>
-            </div>
-            <div class="form-group">
               <div class="input-wrap">
                 <i class="fa fa-flag"></i>
-                <select id="task-priority">
+                <select id="t-prio">
                   <option value="low">Düşük</option>
                   <option value="medium">Orta</option>
                   <option value="high">Yüksek</option>
                 </select>
               </div>
+              <div class="input-wrap">
+                <i class="fa fa-calendar"></i
+                ><input type="date" id="t-deadline" />
+              </div>
+              <button class="btn-primary ripple" onclick="Tasks.addTask()">
+                <i class="fa fa-plus"></i> Ekle
+              </button>
             </div>
-            <button class="btn-primary ripple" onclick="App.addTask()">
-              <i class="fa fa-plus"></i> Ekle
-            </button>
-          </div>
-          <div class="form-group" style="margin-top: 10px">
-            <div class="input-wrap">
-              <i class="fa fa-align-left"></i>
-              <input
+            <div class="input-wrap" style="margin-top: 10px">
+              <i class="fa fa-align-left"></i
+              ><input
                 type="text"
-                id="task-desc"
+                id="t-desc"
                 placeholder="Açıklama (isteğe bağlı)..."
               />
             </div>
           </div>
-        </div>
 
-        <!-- PROGRESS BAR -->
-        <div class="progress-wrap">
-          <div class="progress-label">
-            <span>Genel İlerleme</span>
-            <span id="progress-pct">0%</span>
+          <!-- List header -->
+          <div class="list-header">
+            <h3 id="list-label">Tüm Görevler</h3>
+            <div class="sort-row">
+              <button
+                class="sort-btn active"
+                onclick="Tasks.setSort('date', this)"
+              >
+                Tarih
+              </button>
+              <button
+                class="sort-btn"
+                onclick="Tasks.setSort('priority', this)"
+              >
+                Öncelik
+              </button>
+              <button
+                class="sort-btn"
+                onclick="Tasks.setSort('deadline', this)"
+              >
+                Son Tarih
+              </button>
+              <button class="sort-btn" onclick="Tasks.setSort('name', this)">
+                Ad
+              </button>
+            </div>
           </div>
-          <div class="progress-bar">
-            <div class="progress-fill" id="progress-fill"></div>
-          </div>
-        </div>
 
-        <!-- TASK LIST -->
-        <div class="task-list-header">
-          <h3 id="task-list-label">Tüm Görevler</h3>
-          <div class="sort-btns">
-            <button
-              class="sort-btn active"
-              onclick="App.setSortBy('date', this)"
+          <div class="task-list" id="task-list"></div>
+          <div class="empty-state hidden" id="empty-state">
+            <div class="empty-icon"><i class="fa fa-inbox"></i></div>
+            <h3>Görev bulunamadı</h3>
+            <p>Bu kategoride henüz görev yok. Yukarıdan ekleyebilirsin.</p>
+          </div>
+        </section>
+
+        <!-- ── CALENDAR ── -->
+        <section id="sec-calendar" class="hidden">
+          <div class="cal-header">
+            <button class="cal-nav ripple" onclick="Calendar.prev()">
+              <i class="fa fa-chevron-left"></i>
+            </button>
+            <div>
+              <h3 id="cal-month-title">Haziran 2026</h3>
+              <div class="cal-view-tabs">
+                <button
+                  class="cvt active"
+                  onclick="Calendar.setView('month', this)"
+                >
+                  Aylık
+                </button>
+                <button class="cvt" onclick="Calendar.setView('week', this)">
+                  Haftalık
+                </button>
+                <button class="cvt" onclick="Calendar.setView('day', this)">
+                  Günlük
+                </button>
+              </div>
+            </div>
+            <button class="cal-nav ripple" onclick="Calendar.next()">
+              <i class="fa fa-chevron-right"></i>
+            </button>
+          </div>
+          <div class="cal-grid" id="cal-grid"></div>
+          <div class="cal-legend">
+            <span
+              ><i class="fa fa-circle" style="color: var(--purple)"></i>
+              Görev</span
             >
-              Tarihe Göre
-            </button>
-            <button class="sort-btn" onclick="App.setSortBy('priority', this)">
-              Önceliğe Göre
-            </button>
-            <button class="sort-btn" onclick="App.setSortBy('name', this)">
-              Ada Göre
-            </button>
+            <span
+              ><i class="fa fa-circle" style="color: var(--green)"></i>
+              Tamamlandı</span
+            >
+            <span
+              ><i class="fa fa-circle" style="color: var(--red)"></i>
+              Gecikmiş</span
+            >
           </div>
-        </div>
+        </section>
 
-        <div class="task-list" id="task-list"></div>
+        <!-- ── NOTES ── -->
+        <section id="sec-notes" class="hidden">
+          <div class="notes-topbar">
+            <h3>Not Defteri</h3>
+            <div class="notes-actions">
+              <div class="search-box sm">
+                <i class="fa fa-search"></i>
+                <input
+                  type="text"
+                  placeholder="Not ara..."
+                  id="note-search"
+                  oninput="Notes.search(this.value)"
+                />
+              </div>
+              <select
+                class="cat-filter"
+                id="note-cat-filter"
+                onchange="Notes.filterByCategory(this.value)"
+              >
+                <option value="all">Tüm Kategoriler</option>
+                <option value="kisisel">Kişisel</option>
+                <option value="is">İş</option>
+                <option value="fikir">Fikir</option>
+                <option value="hedef">Hedef</option>
+              </select>
+              <button class="btn-primary ripple" onclick="Notes.openModal()">
+                <i class="fa fa-plus"></i> Yeni Not
+              </button>
+            </div>
+          </div>
+          <div class="notes-grid" id="notes-grid"></div>
+          <div class="empty-state hidden" id="notes-empty">
+            <div class="empty-icon"><i class="fa fa-book-open"></i></div>
+            <h3>Henüz not yok</h3>
+            <p>İlk notunu oluştur!</p>
+          </div>
+        </section>
 
-        <div class="empty-state hidden" id="empty-state">
-          <div class="empty-icon"><i class="fa fa-inbox"></i></div>
-          <h3>Görev bulunamadı</h3>
-          <p>Bu kategoride henüz görev yok. Yukarıdan ekleyebilirsin.</p>
-        </div>
+        <!-- ── POMODORO ── -->
+        <section id="sec-pomodoro" class="hidden">
+          <div class="pomo-container">
+            <div class="pomo-card">
+              <h3>🍅 Pomodoro Zamanlayıcı</h3>
+              <div class="pomo-mode-tabs">
+                <button
+                  class="pomo-tab active"
+                  onclick="Pomodoro.setMode('work', this)"
+                >
+                  Çalışma
+                </button>
+                <button
+                  class="pomo-tab"
+                  onclick="Pomodoro.setMode('short', this)"
+                >
+                  Kısa Mola
+                </button>
+                <button
+                  class="pomo-tab"
+                  onclick="Pomodoro.setMode('long', this)"
+                >
+                  Uzun Mola
+                </button>
+              </div>
+              <div class="pomo-ring-wrap">
+                <svg class="pomo-ring" viewBox="0 0 200 200">
+                  <circle class="pomo-track" cx="100" cy="100" r="85" />
+                  <circle
+                    class="pomo-progress"
+                    id="pomo-circle"
+                    cx="100"
+                    cy="100"
+                    r="85"
+                  />
+                </svg>
+                <div class="pomo-time" id="pomo-time">25:00</div>
+              </div>
+              <div class="pomo-controls">
+                <button
+                  class="pomo-btn ripple"
+                  onclick="Pomodoro.toggle()"
+                  id="pomo-start-btn"
+                >
+                  <i class="fa fa-play" id="pomo-icon"></i>
+                </button>
+                <button
+                  class="pomo-btn pomo-reset ripple"
+                  onclick="Pomodoro.reset()"
+                >
+                  <i class="fa fa-rotate-right"></i>
+                </button>
+              </div>
+              <div class="pomo-stats">
+                <span
+                  >Bu oturum:
+                  <strong id="pomo-session-count">0</strong> pomodoro</span
+                >
+                <span>Toplam: <strong id="pomo-total-count">0</strong></span>
+              </div>
+              <div class="focus-task" id="pomo-focus-task">
+                <p>Odaklanılan görev: <span id="focus-task-name">—</span></p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── AI ASSISTANT ── -->
+        <section id="sec-ai" class="hidden">
+          <div class="ai-container">
+            <div class="ai-header">
+              <div class="ai-avatar"><i class="fa fa-robot"></i></div>
+              <div>
+                <h3>AI Asistan</h3>
+                <p>Planlamanızda size yardımcı olmak için buradayım.</p>
+              </div>
+            </div>
+            <div class="ai-quick-btns">
+              <button class="ai-quick ripple" onclick="AI.quickAction('plan')">
+                <i class="fa fa-sun"></i> Gün Planı Oluştur
+              </button>
+              <button
+                class="ai-quick ripple"
+                onclick="AI.quickAction('priority')"
+              >
+                <i class="fa fa-arrow-up"></i> Öncelikleri Sırala
+              </button>
+              <button
+                class="ai-quick ripple"
+                onclick="AI.quickAction('weekly')"
+              >
+                <i class="fa fa-calendar-week"></i> Haftalık Plan
+              </button>
+              <button
+                class="ai-quick ripple"
+                onclick="AI.quickAction('motivation')"
+              >
+                <i class="fa fa-fire"></i> Motivasyon
+              </button>
+            </div>
+            <div class="ai-chat" id="ai-chat"></div>
+            <div class="ai-input-row">
+              <div class="input-wrap flex1">
+                <i class="fa fa-paper-plane"></i
+                ><input
+                  type="text"
+                  id="ai-inp"
+                  placeholder="AI'ya bir şey sor..."
+                  onkeydown="if (event.key === 'Enter') AI.send();"
+                />
+              </div>
+              <button class="btn-primary ripple" onclick="AI.send()">
+                <i class="fa fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── ACHIEVEMENTS ── -->
+        <section id="sec-achievements" class="hidden">
+          <div class="ach-header">
+            <h3>🏆 Başarımlar</h3>
+            <div class="ach-stats">
+              <span id="ach-unlocked">0</span>/<span id="ach-total">0</span>
+              açıldı
+            </div>
+          </div>
+          <div class="ach-grid" id="ach-grid"></div>
+        </section>
+
+        <!-- ── PROFILE ── -->
+        <section id="sec-profile" class="hidden">
+          <div class="profile-hero">
+            <div class="profile-cover-bg"></div>
+            <div class="profile-hero-body">
+              <div class="profile-avatar-wrap">
+                <div class="profile-avatar-big" id="prof-avatar-big"></div>
+                <label class="avatar-upload-btn ripple" for="avatar-upload">
+                  <i class="fa fa-camera"></i>
+                </label>
+                <input
+                  type="file"
+                  id="avatar-upload"
+                  accept="image/*"
+                  onchange="Profile.uploadAvatar(this)"
+                  style="display: none"
+                />
+              </div>
+              <div class="profile-hero-info">
+                <h2 id="prof-name"></h2>
+                <p id="prof-email"></p>
+                <div class="profile-meta">
+                  <span
+                    ><i class="fa fa-calendar"></i>
+                    <span id="prof-joined"></span
+                  ></span>
+                  <span
+                    ><i class="fa fa-fire"></i>
+                    <span id="prof-streak"></span> günlük seri</span
+                  >
+                  <span
+                    ><i class="fa fa-star"></i> Seviye
+                    <span id="prof-level"></span
+                  ></span>
+                </div>
+              </div>
+              <button
+                class="btn-edit-profile ripple"
+                onclick="Profile.openEditModal()"
+              >
+                <i class="fa fa-pen"></i> Düzenle
+              </button>
+            </div>
+          </div>
+
+          <div class="profile-stats-grid">
+            <div class="ps-card">
+              <p class="ps-val" id="ps-total">0</p>
+              <p class="ps-lbl">Toplam Görev</p>
+            </div>
+            <div class="ps-card">
+              <p class="ps-val" id="ps-done">0</p>
+              <p class="ps-lbl">Tamamlandı</p>
+            </div>
+            <div class="ps-card">
+              <p class="ps-val" id="ps-notes">0</p>
+              <p class="ps-lbl">Not</p>
+            </div>
+            <div class="ps-card">
+              <p class="ps-val" id="ps-xp">0</p>
+              <p class="ps-lbl">Toplam XP</p>
+            </div>
+          </div>
+
+          <div class="profile-section-card">
+            <h4>Güvenlik</h4>
+            <div class="sec-row">
+              <span>Şifre Değiştir</span>
+              <button class="btn-sec ripple" onclick="Profile.changePassword()">
+                Değiştir
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── SETTINGS ── -->
+        <section id="sec-settings" class="hidden">
+          <h3 class="set-title">Ayarlar</h3>
+          <div class="settings-card">
+            <h4><i class="fa fa-palette"></i> Görünüm</h4>
+            <div class="setting-row">
+              <div>
+                <span>Tema</span><small>Uygulamanın görünümünü değiştir</small>
+              </div>
+              <select
+                class="set-select"
+                id="theme-select"
+                onchange="Settings.setTheme(this.value)"
+              >
+                <option value="dark">Dark (Glassmorphism)</option>
+                <option value="light">Light</option>
+                <option value="bw">Siyah & Beyaz</option>
+              </select>
+            </div>
+          </div>
+          <div class="settings-card">
+            <h4><i class="fa fa-bell"></i> Bildirimler</h4>
+            <div class="setting-row">
+              <div>
+                <span>Tarayıcı Bildirimleri</span
+                ><small>Görev hatırlatmaları için</small>
+              </div>
+              <button
+                class="toggle-btn ripple"
+                id="notif-toggle"
+                onclick="Notifications.requestPermission()"
+              >
+                <span id="notif-toggle-text">Aç</span>
+              </button>
+            </div>
+            <div class="setting-row">
+              <div>
+                <span>Günlük Özet</span><small>Her sabah 09:00'da</small>
+              </div>
+              <div class="switch-wrap">
+                <input
+                  type="checkbox"
+                  id="daily-summary-toggle"
+                  onchange="Settings.toggleDailySummary(this.checked)"
+                />
+                <label for="daily-summary-toggle" class="switch"></label>
+              </div>
+            </div>
+          </div>
+          <div class="settings-card">
+            <h4><i class="fa fa-database"></i> Veri</h4>
+            <div class="setting-row">
+              <div>
+                <span>Verileri Dışa Aktar</span
+                ><small>JSON formatında indir</small>
+              </div>
+              <button class="btn-sec ripple" onclick="Settings.exportData()">
+                Dışa Aktar
+              </button>
+            </div>
+            <div class="setting-row">
+              <div>
+                <span>Hesabı Sil</span
+                ><small style="color: var(--red)">Bu işlem geri alınamaz</small>
+              </div>
+              <button
+                class="btn-danger-sm ripple"
+                onclick="Settings.deleteAccount()"
+              >
+                Sil
+              </button>
+            </div>
+          </div>
+        </section>
       </main>
     </div>
 
-    <!-- TOAST CONTAINER -->
+    <!-- ══════════════════════════════════════════════
+     MODALS
+══════════════════════════════════════════════ -->
+
+    <!-- Note Modal -->
+    <div id="note-modal" class="modal-overlay hidden">
+      <div class="modal-box">
+        <div class="modal-head">
+          <h3 id="note-modal-title">Yeni Not</h3>
+          <button class="modal-close ripple" onclick="Notes.closeModal()">
+            <i class="fa fa-xmark"></i>
+          </button>
+        </div>
+        <div class="form-group">
+          <label>Başlık</label>
+          <div class="input-wrap">
+            <i class="fa fa-heading"></i
+            ><input
+              type="text"
+              id="note-title-inp"
+              placeholder="Not başlığı..."
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Kategori</label>
+          <div class="input-wrap">
+            <i class="fa fa-tag"></i>
+            <select id="note-cat-inp">
+              <option value="kisisel">Kişisel</option>
+              <option value="is">İş</option>
+              <option value="fikir">Fikir</option>
+              <option value="hedef">Hedef</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>İçerik</label
+          ><textarea
+            id="note-body-inp"
+            placeholder="Notunuzu buraya yazın..."
+            rows="7"
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label>Renk</label>
+          <div class="color-picker-row">
+            <button
+              class="cp-btn active"
+              data-c="default"
+              onclick="Notes.pickColor(this)"
+            ></button>
+            <button
+              class="cp-btn"
+              data-c="warm"
+              onclick="Notes.pickColor(this)"
+            ></button>
+            <button
+              class="cp-btn"
+              data-c="cool"
+              onclick="Notes.pickColor(this)"
+            ></button>
+            <button
+              class="cp-btn"
+              data-c="mint"
+              onclick="Notes.pickColor(this)"
+            ></button>
+            <button
+              class="cp-btn"
+              data-c="rose"
+              onclick="Notes.pickColor(this)"
+            ></button>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-ghost ripple" onclick="Notes.closeModal()">
+            İptal
+          </button>
+          <button class="btn-primary ripple" onclick="Notes.save()">
+            Kaydet
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Edit Modal -->
+    <div id="profile-edit-modal" class="modal-overlay hidden">
+      <div class="modal-box">
+        <div class="modal-head">
+          <h3>Profili Düzenle</h3>
+          <button class="modal-close ripple" onclick="Profile.closeEditModal()">
+            <i class="fa fa-xmark"></i>
+          </button>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Ad</label>
+            <div class="input-wrap">
+              <i class="fa fa-user"></i><input type="text" id="e-fn" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Soyad</label>
+            <div class="input-wrap">
+              <i class="fa fa-user"></i><input type="text" id="e-ln" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Doğum Tarihi</label>
+          <div class="input-wrap">
+            <i class="fa fa-calendar"></i><input type="date" id="e-dob" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-ghost ripple" onclick="Profile.closeEditModal()">
+            İptal
+          </button>
+          <button class="btn-primary ripple" onclick="Profile.saveEdit()">
+            Kaydet
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notifications Panel -->
+    <div id="notif-panel" class="notif-panel hidden">
+      <div class="np-header">
+        <h4>Bildirimler</h4>
+        <button onclick="Notifications.clearAll()" class="np-clear">
+          Tümünü Temizle
+        </button>
+      </div>
+      <div class="np-list" id="np-list">
+        <p class="np-empty">Bildirim yok</p>
+      </div>
+    </div>
+
+    <!-- Focus Mode Overlay -->
+    <div id="focus-overlay" class="hidden">
+      <div class="focus-content">
+        <button class="focus-exit ripple" onclick="App.exitFocus()">
+          <i class="fa fa-xmark"></i>
+        </button>
+        <div class="focus-timer" id="focus-timer">25:00</div>
+        <p class="focus-task-text" id="focus-task-text">Odaklanma Modu</p>
+        <p class="focus-hint">ESC ile çıkabilirsin</p>
+      </div>
+    </div>
+
+    <!-- Toast container -->
     <div id="toast-container"></div>
+
+    <!-- Level Up Modal -->
+    <div id="levelup-modal" class="modal-overlay hidden">
+      <div class="modal-box levelup-box">
+        <div class="levelup-icon">⭐</div>
+        <h2>Seviye Atladın!</h2>
+        <p class="levelup-level" id="levelup-level">Seviye 2</p>
+        <p>Tebrikler! Harika bir iş çıkardın.</p>
+        <button class="btn-primary ripple" onclick="UI.closeLevelUp()">
+          Devam Et 🚀
+        </button>
+      </div>
+    </div>
 
     <script src="script.js"></script>
   </body>
