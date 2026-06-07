@@ -583,3 +583,58 @@
     <script src="script.js"></script>
   </body>
 </html>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Arazion</title>
+</head>
+<body>
+
+<h1>Arazion Hazırdır 🚀</h1>
+<button id="login">Google ilə Giriş</button>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import { getAuth, GoogleAuthProvider, signInWithPopup }
+
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyBjknIEgfSz7iCpzTBMOLwWJRg-Bevp_sc",
+
+authDomain: "arazion-47e25.firebaseapp.com",
+
+projectId: "arazion-47e25",
+
+storageBucket: "arazion-47e25.firebasestorage.app",
+
+messagingSenderId: "908393039153",
+
+appId: "1:908393039153:web:57ff4b56bb88ecd7e21c10"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const provider = new GoogleAuthProvider();
+
+document.getElementById("login").onclick = () => {
+
+signInWithPopup(auth, provider)
+
+.then(()=>alert("Giriş uğurlu!"))
+
+.catch(err=>alert(err.message));
+
+}
+
+</script>
+
+</body>
+
+</html>
